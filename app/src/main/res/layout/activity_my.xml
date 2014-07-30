@@ -1,0 +1,195 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MyActivity"
+    android:background="@color/clouds">
+
+    <ImageView
+        android:id="@+id/frag2_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="70sp"
+        android:text="@string/BMI"
+        android:id="@+id/bmi_title"
+        android:textColor="@color/cyan_900"
+        android:textSize="64sp"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="@string/body_mass_index"
+        android:id="@+id/textViewBMIsubtitle"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="14sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/bmi_title" />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/weight"
+        android:id="@+id/textViewName"
+        android:textSize="22sp"
+        android:gravity="left|center_vertical"
+        android:fontFamily="sans-serif-bold"
+        android:paddingStart="8sp"
+        android:layout_alignBottom="@+id/editTextWeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/editTextWeight" />
+
+
+    <EditText
+        android:layout_width="210sp"
+        android:layout_height="40sp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextWeight"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-light"
+        android:ellipsize="middle"
+        android:textColor="@color/cyan_900"
+        android:layout_toEndOf="@+id/textViewName"
+        android:layout_toRightOf="@+id/textViewName"
+        android:layout_below="@+id/textViewBMIsubtitle"
+        android:layout_marginTop="12sp" />
+
+    <TextView
+        android:layout_width="80sp"
+        android:layout_height="40sp"
+        android:text="@string/height"
+        android:id="@+id/textViewHeight"
+        android:textSize="22sp"
+        android:gravity="left|center_vertical"
+        android:fontFamily="sans-serif-bold"
+        android:paddingStart="8sp"
+        android:layout_toEndOf="@+id/frag2_icon"
+        android:layout_alignBottom="@+id/editTextHeight1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="100sp"
+        android:layout_height="40sp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextHeight1"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/cyan_900"
+        android:layout_below="@+id/spinnerWeight"
+        android:layout_toRightOf="@+id/textViewHeight" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="Calculate"
+        android:id="@+id/buttonBMI"
+        android:background="@android:color/transparent"
+        android:textAllCaps="true"
+        android:layout_marginTop="35dp"
+        android:textSize="24sp"
+        android:layout_below="@+id/spinnerHeight1"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="100sp"
+        android:text="O"
+        android:id="@+id/textViewBMIAnswer"
+        android:textSize="80sp"
+        android:textColor="@color/cyan_900"
+        android:gravity="center_vertical|center|center_horizontal"
+        android:fontFamily="sans-serif-bold"
+        android:layout_below="@+id/buttonBMI"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewBMIstatus"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:text="Overweight"
+        android:layout_below="@+id/textViewBMIAnswer"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewBMIinfo"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="What does this mean?"
+        android:layout_below="@+id/textViewBMIstatus"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="100sp"
+        android:layout_height="40sp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextHeight2"
+        android:gravity="center_vertical|center_horizontal"
+        android:fontFamily="sans-serif-light"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/textViewHeight"
+        android:layout_toEndOf="@+id/editTextHeight1"
+        android:layout_toRightOf="@+id/editTextHeight1"
+        android:layout_alignRight="@+id/editTextWeight"
+        android:layout_alignEnd="@+id/editTextWeight"
+        android:textColor="@color/cyan_900"/>
+
+    <Spinner
+        android:layout_width="215sp"
+        android:layout_height="35sp"
+        android:id="@+id/spinnerWeight"
+        android:layout_below="@+id/editTextWeight"
+        android:layout_toRightOf="@+id/textViewName"
+        android:entries="@array/weight"
+        android:gravity="center_horizontal"
+        />
+
+    <Spinner
+        android:layout_width="105sp"
+        android:layout_height="35sp"
+        android:id="@+id/spinnerHeight1"
+        android:layout_toEndOf="@+id/textViewHeight"
+        android:layout_toRightOf="@+id/textViewHeight"
+        android:entries="@array/height1"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/textViewHeight" />
+
+    <Spinner
+        android:layout_width="115sp"
+        android:layout_height="35sp"
+        android:id="@+id/spinnerHeight2"
+        android:entries="@array/height2"
+        android:gravity="center_horizontal"
+        android:layout_toEndOf="@+id/spinnerHeight1"
+        android:layout_alignLeft="@+id/editTextHeight2"
+        android:layout_alignStart="@+id/editTextHeight2"
+        android:layout_alignRight="@+id/spinnerWeight"
+        android:layout_alignEnd="@+id/spinnerWeight"
+        android:layout_below="@+id/editTextHeight2" />
+
+
+</RelativeLayout>

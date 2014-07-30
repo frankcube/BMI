@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_height_options">
+        <item>@string/pref_height_metric_label</item>
+        <item>@string/pref_height_imperial_label</item>
+    </string-array>
+
+    <string-array name="pref_height_values">
+        <item>@string/pref_height_metric</item>
+        <item>@string/pref_height_imperial</item>
+    </string-array>
+
+    <string-array name="pref_weight_options">
+        <item>@string/pref_weight_metric_label</item>
+        <item>@string/pref_weight_imperial_label</item>
+    </string-array>
+
+    <string-array name="pref_weight_values">
+        <item>@string/pref_weight_metric</item>
+        <item>@string/pref_weight_imperial</item>
+    </string-array>
+
+
+
+    <string-array name="weight">
+        <item>@string/kilograms</item>
+        <item>@string/pounds</item>
+        <item>@string/stones</item>
+    </string-array>
+
+    <string-array name="height1">
+        <item>@string/metres</item>
+        <item>@string/feet</item>
+    </string-array>
+
+    <string-array name="height2">
+        <item>@string/centimetres</item>
+        <item>@string/inches</item>
+    </string-array>
+
+
+
+
+</resources>
