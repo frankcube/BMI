@@ -127,7 +127,6 @@
         android:fontFamily="sans-serif-light"
         android:gravity="center"
         android:textAllCaps="true"
-        android:text="Overweight"
         android:layout_below="@+id/textViewBMIAnswer"
         android:layout_centerHorizontal="true" />
 
@@ -138,7 +137,6 @@
         android:textSize="20sp"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:text="What does this mean?"
         android:layout_below="@+id/textViewBMIstatus"
         android:layout_centerHorizontal="true" />
 

@@ -5,7 +5,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
@@ -66,11 +65,6 @@ public class SettingsActivity extends PreferenceActivity
         return true;
     }
 
-    public void onBackPressed() {
-        Toast.makeText(getApplicationContext(), "You need to save settings.",
-                Toast.LENGTH_SHORT).show();
-        return;
-    }
 
 
 }

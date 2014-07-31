@@ -24,12 +24,9 @@ public class MyActivity extends Activity {
     EditText weight, height1, height2;
     Button calculate;
     Spinner spinnerWeight, spinnerHeight1, spinnerHeight2;
+    String sWeight, sHeight1, sHeight2, spinnerWeightText, spinnerHeight1Text, spinnerHeight2Text;
 
     InputMethodManager inputManager;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +36,6 @@ public class MyActivity extends Activity {
 
         //Shared preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-
-
 
         bmi_status = (TextView) findViewById(R.id.textViewBMIstatus);
         weight = (EditText) findViewById(R.id.editTextWeight);
@@ -60,27 +54,22 @@ public class MyActivity extends Activity {
         String heightHint = prefs.getString(getString(R.string.pref_height_key),
                 getString(R.string.pref_height_metric));
 
-
-
-
-
         bmi_answer = (TextView) findViewById(R.id.textViewBMIAnswer);
         bmi_info = (TextView) findViewById(R.id.textViewBMIinfo);
         calculate = (Button) findViewById(R.id.buttonBMI);
         inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
-
-
-
-
-
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sWeight= weight.getText().toString();
-                String sHeight1 = height1.getText().toString();
-                String sHeight2 = height2.getText().toString();
+                sWeight= weight.getText().toString();
+                sHeight1 = height1.getText().toString();
+                sHeight2 = height2.getText().toString();
+                spinnerWeightText = spinnerWeight.getSelectedItem().toString();
+                spinnerHeight1Text = spinnerHeight1.getSelectedItem().toString();
+                spinnerHeight2Text = spinnerHeight2.getSelectedItem().toString();
+
 
                 if (sWeight.equals("") || sHeight1.equals("") || sHeight2.equals("")) {
 
@@ -90,33 +79,184 @@ public class MyActivity extends Activity {
                     Double dWeight = Double.parseDouble(weight.getText().toString());
                     Double dHeight1 = Double.parseDouble(height1.getText().toString());
                     Double dHeight2 = Double.parseDouble(height2.getText().toString());
-                    Double dHeightTotal = ((dHeight1) + (dHeight2/100));
-
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
 
-                    int answer = (int) Math.round(dWeight / ((dHeightTotal) * (dHeightTotal)));
-                    bmi_answer.setText(Integer.toString(answer));
+                    if (spinnerWeightText.equals("pounds") && spinnerHeight1Text.equals("feet") &&
+                            spinnerHeight2Text.equals("inches")) {
+                        Double dHeightTotal = ((dHeight1*12) + (dHeight2));
+                        int answer = (int) Math.round((dWeight / ((dHeightTotal) * (dHeightTotal)))*703);
+                        bmi_answer.setText(Integer.toString(answer));
+                        if (answer >= 18 && answer <= 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setText(getString(R.string.normal_weight));
+                            bmi_info.setText(getString(R.string.what_does_this_mean));
+                        }
+                        else if (answer < 18) {
+                            if (answer < 16){
+                                bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                                bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                                bmi_status.setText("Severe thinness");
+                                bmi_info.setText(getString(R.string.what_does_this_mean));
+                            }
+                            bmi_answer.setTextColor(getResources().getColor(R.color.orange_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.orange_500));
+                            bmi_status.setText("Under weight");
+                            bmi_info.setText(getString(R.string.what_does_this_mean));
+                        }
+                        else if (answer > 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Over weight");
+                            bmi_info.setText(getString(R.string.what_does_this_mean));
+                        }
+                    }
+                    else if (spinnerWeightText.equals("kilograms") && spinnerHeight1Text.equals("feet") &&
+                            spinnerHeight2Text.equals("inches")){
+                        Double dHeightTotal = ((dHeight1*12) + (dHeight2));
+                        int answer = (int) Math.round(((dWeight*2.20462) / ((dHeightTotal) * (dHeightTotal)))*703);
+                        bmi_answer.setText(Integer.toString(answer));
+                        if (answer >= 18 && answer <= 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setText("Normal weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer < 18) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Under weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer > 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Over weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                    }
+                    else if (spinnerWeightText.equals("pounds") && spinnerHeight1Text.equals("metres") &&
+                            spinnerHeight2Text.equals("inches")){
+                        Double dHeightTotal = ((dHeight1*39.3700787) + (dHeight2));
+                        int answer = (int) Math.round((dWeight / ((dHeightTotal) * (dHeightTotal)))*703);
+                        bmi_answer.setText(Integer.toString(answer));
+                        if (answer >= 18 && answer <= 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setText("Normal weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer < 18) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Under weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer > 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Over weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                    }
+                    else if (spinnerWeightText.equals("pounds") && spinnerHeight1Text.equals("feet") &&
+                            spinnerHeight2Text.equals("centimetres")){
+                        Double dHeightTotal = ((dHeight1*12) + (dHeight2*0.393700787));
+                        int answer = (int) Math.round((dWeight / ((dHeightTotal) * (dHeightTotal)))*703);
+                        bmi_answer.setText(Integer.toString(answer));
+                        if (answer >= 18 && answer <= 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setText("Normal weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer < 18) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Under weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer > 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Over weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                    }
+                    else if (spinnerWeightText.equals("kilograms") && spinnerHeight1Text.equals("metres") &&
+                            spinnerHeight2Text.equals("inches")){
+                        Double dHeightTotal = ((dHeight1) + (dHeight2*0.0254));
+                        int answer = (int) Math.round(dWeight / ((dHeightTotal) * (dHeightTotal)));
+                        bmi_answer.setText(Integer.toString(answer));
+                        if (answer >= 18 && answer <= 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setText("Normal weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer < 18) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Under weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer > 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Over weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                    }
+                    else if (spinnerWeightText.equals("kilograms") && spinnerHeight1Text.equals("metres") &&
+                            spinnerHeight2Text.equals("centimetres")){
+                        Double dHeightTotal = ((dHeight1) + (dHeight2/100));
+                        int answer = (int) Math.round(dWeight / ((dHeightTotal) * (dHeightTotal)));
+                        bmi_answer.setText(Integer.toString(answer));
+                        if (answer >= 18 && answer <= 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setText("Normal weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer < 18) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Under weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer > 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Over weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                    }
+                    else if (spinnerWeightText.equals("pounds") && spinnerHeight1Text.equals("metres") &&
+                            spinnerHeight2Text.equals("centimetres")){
+                        Double dHeightTotal = ((dHeight1) + (dHeight2/100));
+                        int answer = (int) Math.round((dWeight*0.453592) / ((dHeightTotal) * (dHeightTotal)));
+                        bmi_answer.setText(Integer.toString(answer));
+                        if (answer >= 18 && answer <= 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.green_500));
+                            bmi_status.setText("Normal weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer < 18) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Under weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                        else if (answer > 25) {
+                            bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setTextColor(getResources().getColor(R.color.red_500));
+                            bmi_status.setText("Over weight");
+                            bmi_info.setText("What does this mean, exactly?");
+                        }
+                    }
 
-
-                    if (answer >= 18 && answer <= 25) {
-                        bmi_answer.setTextColor(getResources().getColor(R.color.green_500));
-                        bmi_status.setTextColor(getResources().getColor(R.color.green_500));
-                        bmi_status.setText("Normal weight");
-                        bmi_info.setText("What does this mean, exactly?");
-                    }
-                    else if (answer < 18) {
-                        bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
-                        bmi_status.setTextColor(getResources().getColor(R.color.red_500));
-                        bmi_status.setText("Under weight");
-                        bmi_info.setText("What does this mean, exactly?");
-                    }
-                    else if (answer > 25) {
-                        bmi_answer.setTextColor(getResources().getColor(R.color.red_500));
-                        bmi_status.setTextColor(getResources().getColor(R.color.red_500));
-                        bmi_status.setText("Over weight");
-                        bmi_info.setText("What does this mean, exactly?");
-                    }
 
                 }
             }
@@ -241,11 +381,7 @@ public class MyActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
-            return true;
-        }
-        else if(id == R.id.action_about) {
+        if(id == R.id.action_about) {
             startActivity(new Intent(this, About.class));
             return true;
         }

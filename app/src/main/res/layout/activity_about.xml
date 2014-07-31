@@ -9,7 +9,7 @@
     tools:context="com.frankey.bmi.About">
 
     <TextView
-        android:text="Frankey Chung"
+        android:text="Frankey C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

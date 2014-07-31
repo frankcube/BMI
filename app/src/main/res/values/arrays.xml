@@ -26,7 +26,6 @@
     <string-array name="weight">
         <item>@string/kilograms</item>
         <item>@string/pounds</item>
-        <item>@string/stones</item>
     </string-array>
 
     <string-array name="height1">

@@ -3,23 +3,6 @@
 
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
 
-    <ListPreference
-        android:key="@string/pref_weight_key"
-        android:title="@string/pref_title_weight"
-        android:defaultValue="@string/pref_weight_metric"
-        android:entries="@array/pref_weight_options"
-        android:entryValues="@array/pref_weight_values"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null" />
 
-
-    <ListPreference
-        android:key="@string/pref_height_key"
-        android:title="@string/pref_title_height"
-        android:defaultValue="@string/pref_height_metric"
-        android:entries="@array/pref_height_options"
-        android:entryValues="@array/pref_height_values"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null" />
 
 </PreferenceScreen>
